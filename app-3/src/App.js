@@ -3,16 +3,36 @@ import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      array: [
+        "Porsche",
+        "Mercedes",
+        "BMW",
+        "Honda",
+        "Mclaren",
+        "Toyota",
+        "Lexus"
+      ],
+      filter: ""
+    };
+  }
+  handleChange(value) {
+    this.setState({ filter: value });
+  }
   render() {
+    let carDisplay = this.state.array
+      .filter(element => {
+        return element.toLowerCase().includes(this.state.filter.toLowerCase());
+      })
+      .map(element => {
+        return <h2>{element}</h2>;
+      });
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <input onChange={event => this.handleChange(event.target.value)} />
+        {carDisplay}
       </div>
     );
   }

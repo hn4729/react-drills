@@ -19,12 +19,16 @@ class App extends Component {
       <div className="App">
         <h1>My to-do list: </h1>
         <input
+          value={this.state.task}
           placeholder="Enter new task"
           onChange={event => this.handleChange(event.target.value)}
         />
         <button
           onClick={() => {
-            this.setState({ list: [...this.state.list, this.state.task] });
+            this.setState({
+              list: [...this.state.list, this.state.task],
+              task: ""
+            });
           }}
         >
           Add
